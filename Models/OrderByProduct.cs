@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class OrderProduct
+  public class OrderByProduct
   {
     [Key]
-    public int OrderProductId { get; set; }
+    public int OrderByProductId { get; set; }
 
     [Required]
     public int OrderId { get; set; }
