@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class Products
+  public class Product
   {
     [Key]
     public int ProductId { get; set; }
 
     [Required]
     public int CustomerId { get; set; }
-    public Customers Customers { get; set; }
+    public Customer Customer { get; set; }
 
     [Required]
     public int ProductTypeId { get; set; }

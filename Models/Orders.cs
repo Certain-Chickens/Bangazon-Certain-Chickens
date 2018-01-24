@@ -8,7 +8,7 @@ namespace BangazonAPI.Models
   public class Orders
   {
     [Key]
-    public int OrderId { get; set; }
+    public int OrdersId { get; set; }
 
     [Required]
     [DataType(DataType.Date)]
@@ -21,7 +21,7 @@ namespace BangazonAPI.Models
     public int? PaymentTypeId { get; set;} // ? means that the variable can be null
     public PaymentType PaymentType { get; set; }
 
-    public ICollection<OrderProduct> OrderProducts;
+    public ICollection<OrderProduct> OrderProduct;
 
   }
 }

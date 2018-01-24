@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
  
 namespace BangazonAPI.Models
 {
-   public class Customers
+   public class Customer
    {
      [Key]
      public int CustomerId { get; set; }

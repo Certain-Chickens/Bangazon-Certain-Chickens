@@ -5,17 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class EmployeeTrainings
+  public class EmployeeTraining
   {
     [Key]
-    public int EmployeeTrainingsId { get; set; }
+    public int EmployeeTrainingId { get; set; }
 
     [Required]
     public int TrainingProgramId { get; set; }
     public TrainingProgram TrainingProgram { get; set; }
     
     public int EmployeeId { get; set; }
-    public Employees Employees { get; set; }
+    public Employee Employee { get; set; }
 
   }
 }
