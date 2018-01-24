@@ -12,7 +12,10 @@ namespace BangazonAPI.Models
 
     [Required]
     public int TrainingProgramId { get; set; }
+    public TrainingProgram TrainingProgram { get; set; }
+    
     public int EmployeeId { get; set; }
+    public Employees Employees { get; set; }
 
   }
 }

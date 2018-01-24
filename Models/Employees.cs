@@ -12,7 +12,7 @@ namespace BangazonAPI.Models
 
     [Required]
     public int DepartmentId { get; set; }
-    public Department Departmenet { get; set; }
+    public Department Department { get; set; }
 
     public string FirstName { get; set; }
     public string LastName { get; set; }
