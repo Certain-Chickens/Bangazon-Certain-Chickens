@@ -15,7 +15,6 @@ namespace BangazonAPI.Models
 
     public string DecommissionDate { get; set; };
 
-    // public ICollection<OrderProduct> OrderProducts;
-
+    public ICollection<EmployeesComputers> EmployeesComputers;
   }
 }
