@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class PaymentTypes
+  public class PaymentType
   {
     [Key]
     public int PaymentTypeId { get; set; }
