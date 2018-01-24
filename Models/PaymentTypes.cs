@@ -5,21 +5,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class OrderProduct
+  public class PaymentTypes
   {
     [Key]
     public int PaymentTypeId { get; set; }
 
     [Required]
     public int CustomerId { get; set; }
-    public CustomerId CustomerId { get; set; }
+    public Customers Customers { get; set; }
 
     [Required]
     public string PaymentType { get; set; }
-    public PaymentType PaymentType { get; set; }
 
     [Required]
     public int AccountNumber { get; set; }
-    public AccountNumber AccountNumber { get; set; }
   }
 }
