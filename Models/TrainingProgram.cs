@@ -8,12 +8,12 @@ namespace BangazonAPI.Models
   public class TrainingProgram
   {
     [Key]
-    public int TrainingProgramId { get; set; };
+    public int TrainingProgramId { get; set; }
 
     [Required]
-    public string StartDate { get; set; };
-    public string EndDate { get; set; };
-    public int MaxAttendees { get; set; };
+    public string StartDate { get; set; }
+    public string EndDate { get; set; }
+    public int MaxAttendees { get; set; }
     
     // public ICollection<OrderProduct> OrderProducts;
 

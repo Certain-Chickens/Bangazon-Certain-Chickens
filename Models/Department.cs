@@ -8,14 +8,14 @@ namespace BangazonAPI.Models
   public class Department
   {
     [Key]
-    public int DepartmentId { get; set; };
+    public int DepartmentId { get; set; }
 
     [Required]
-    public int DepartmentId { get; set; };
+    public int DepartmentId { get; set; }
 
-    public string DepartmentName { get; set; };
+    public string DepartmentName { get; set; }
     
-    public int ExpenseBudget { get; set; };
+    public int ExpenseBudget { get; set; }
     
     // public ICollection<OrderProduct> OrderProducts;
 

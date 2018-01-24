@@ -8,16 +8,16 @@ namespace BangazonAPI.Models
   public class Employees
   {
     [Key]
-    public int EmployeesId { get; set; };
+    public int EmployeesId { get; set; }
 
     [Required]
-    public int DepartmentId { get; set; };
+    public int DepartmentId { get; set; }
     public Department Departmenet { get; set; }
 
-    public string FirstName { get; set; };
-    public string LastName { get; set; };
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
     
-    public bool Supervisor { get; set; };
+    public bool Supervisor { get; set; }
     
     public ICollection<EmployeesComputers> EmployeesComputers;
     public ICollection<EmployeeTrainings> EmployeeTrainings;
