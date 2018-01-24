@@ -11,6 +11,7 @@ namespace BangazonAPI.Data
 
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderProduct> OrderProduct { get; set; }
+        public DbSet<Customers> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
