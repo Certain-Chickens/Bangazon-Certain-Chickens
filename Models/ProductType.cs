@@ -8,10 +8,10 @@ namespace BangazonAPI.Models
   public class ProductType
   {
     [Key]
-    public int ProductTypeId { get; set; };
+    public int ProductTypeId { get; set; }
 
     [Required]
-    public string ProductCategory { get; set; };
+    public string ProductCategory { get; set; }
 
     // public ICollection<OrderProduct> OrderProducts;
 

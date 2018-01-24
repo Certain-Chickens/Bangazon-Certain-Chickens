@@ -9,6 +9,11 @@ namespace BangazonAPI.Data
             : base(options)
         { }
 
+        public DbSet<Computer> Computer { get; set; }
+        public DbSet<Employees> Employees { get; set; }
+        public DbSet<EmployeesComputers> EmployeesComputers { get; set; }
+        public DbSet<EmployeeTrainings> EmployeeTrainings { get; set; }
+        public DbSet<Department> Department { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderProduct> OrderProduct { get; set; }
         public DbSet<Customers> Customers { get; set; }

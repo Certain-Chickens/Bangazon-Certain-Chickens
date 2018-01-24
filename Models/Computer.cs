@@ -8,12 +8,12 @@ namespace BangazonAPI.Models
   public class Computer
   {
     [Key]
-    public int ComputerId { get; set; };
+    public int ComputerId { get; set; }
 
     [Required]
-    public string PurchaseDate { get; set; ;}
+    public string PurchaseDate { get; set; }
 
-    public string DecommissionDate { get; set; };
+    public string DecommissionDate { get; set; }
 
     public ICollection<EmployeesComputers> EmployeesComputers;
   }
