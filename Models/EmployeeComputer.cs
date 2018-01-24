@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
-  public class EmployeesComputers
+  public class EmployeeComputer
   {
     [Key]
-    public int EmployeesComputers { get; set; }
+    public int EmployeeComputerId { get; set; }
 
     [Required]
     public int ComputerId { get; set; }
