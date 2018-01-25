@@ -11,13 +11,8 @@ namespace BangazonAPI.Models
     public int DepartmentId { get; set; }
 
     [Required]
-    public int DepartmentId { get; set; }
-
     public string DepartmentName { get; set; }
-    
     public int ExpenseBudget { get; set; }
-    
-    // public ICollection<OrderProduct> OrderProducts;
 
   }
 }

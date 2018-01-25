@@ -13,7 +13,5 @@ namespace BangazonAPI.Models
     [Required]
     public string ProductCategory { get; set; }
 
-    // public ICollection<OrderProduct> OrderProducts;
-
   }
 }
