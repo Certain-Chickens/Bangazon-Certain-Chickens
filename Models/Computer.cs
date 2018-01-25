@@ -12,7 +12,6 @@ namespace BangazonAPI.Models
 
     [Required]
     public string PurchaseDate { get; set; }
-
     public string DecommissionDate { get; set; }
 
     public ICollection<EmployeeComputer> EmployeeComputer;

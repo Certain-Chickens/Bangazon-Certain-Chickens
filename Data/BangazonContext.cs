@@ -10,13 +10,17 @@ namespace BangazonAPI.Data
         { }
 
         public DbSet<Computer> Computer { get; set; }
-        public DbSet<Employees> Employees { get; set; }
-        public DbSet<EmployeesComputers> EmployeesComputers { get; set; }
-        public DbSet<EmployeeTrainings> EmployeeTrainings { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<EmployeeComputer> EmployeeComputer { get; set; }
+        public DbSet<EmployeeTraining> EmployeeTraining { get; set; }
         public DbSet<Department> Department { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderProduct> OrderProduct { get; set; }
-        public DbSet<Customers> Customers { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<PaymentType> PaymentType { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<ProductType> ProductType { get; set; }
+        public DbSet<TrainingProgram> TrainingProgram { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
