@@ -2,38 +2,44 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BangazonAPI.Data;
+using BangazonAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BangazonAPI.Data;
-using BangazonAPI.Models;
 
 namespace BangazonAPI.Controllers
 {
-    [Route("api/[controller]")]
-    public class CustomerController : Controller
+    [Produces("application/json")]
+    [Route("customers")]
+    public class CustomersController : Controller
     {
-        private BangazonContext _context;
-        // Constructor method to create an instance of context to communicate with our database.
-        public CustomerController(BangazonContext ctx)
+        private BangazonContext context;
+
+        public CustomersController(BangazonContext ctx)
         {
-            _context = ctx;
+            context = ctx;
         }
 
+        // GET /customers
         [HttpGet]
         public IActionResult Get()
         {
-            var customer = _context.Customer.ToList();
-            if (customer == null)
+            IQueryable<object> customers = from customer in context.Customer select customer;
+
+            if (customers == null)
             {
                 return NotFound();
             }
-            return Ok(customer);
+
+            return Ok(customers);
+
         }
 
-        // GET api/values/5
-        [HttpGet("{id}", Name = "Customer")]
-        public IActionResult Get(int id)
+        // GET /customers/5
+        [HttpGet("{id}", Name = "GetCustomer")]
+        public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +48,7 @@ namespace BangazonAPI.Controllers
 
             try
             {
-                Customer customer = _context.Customer.Single(g => g.CustomerId == id);
+                Customer customer = context.Customer.Single(m => m.CustomerId == id);
 
                 if (customer == null)
                 {
@@ -55,22 +61,24 @@ namespace BangazonAPI.Controllers
             {
                 return NotFound();
             }
+
+
         }
 
-        // POST api/values
+        // POST /customers
         [HttpPost]
-        public IActionResult Post([FromBody]Customer customer)
+        public IActionResult Post([FromBody] Customer customer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Customer.Add(customer);
+            context.Customer.Add(customer);
 
             try
             {
-                _context.SaveChanges();
+                context.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -83,26 +91,29 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-            return CreatedAtRoute("Customer", new { id = customer.CustomerId }, customer);
+
+            return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
-        // PUT api/values/5
+        // PUT /customers/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Customer Customer)
+        public IActionResult Put(int id, [FromBody] Customer customer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != Customer.CustomerId)
+            if (id != customer.CustomerId)
             {
                 return BadRequest();
             }
-            _context.Customer.Update(Customer);
+
+            context.Entry(customer).State = EntityState.Modified;
+
             try
             {
-                _context.SaveChanges();
+                context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -117,11 +128,33 @@ namespace BangazonAPI.Controllers
             }
 
             return new StatusCodeResult(StatusCodes.Status204NoContent);
-        } 
+        }
 
-        private bool CustomerExists(int CustomerId)
+        // DELETE /customers/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            return _context.Customer.Any(g => g.CustomerId == CustomerId);
-        }       
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Customer customer = context.Customer.Single(m => m.CustomerId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            context.Customer.Remove(customer);
+            context.SaveChanges();
+
+            return Ok(customer);
+        }
+
+        private bool CustomerExists(int id)
+        {
+            return context.Customer.Count(e => e.CustomerId == id) > 0;
+        }
+
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BangazonAPI.Migrations
 {
-    public partial class InitialDBCreation : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,10 @@ namespace BangazonAPI.Migrations
                 {
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y%m-%d %H:%M:%S')"),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true)
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetAddress = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,9 +86,10 @@ namespace BangazonAPI.Migrations
                 {
                     PaymentTypeId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AccountNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountNumber = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PaymentName = table.Column<string>(type: "TEXT", nullable: false)
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 12, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,15 +158,16 @@ namespace BangazonAPI.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    OrdersId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateCompleted = table.Column<DateTime>(type: "TEXT", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     PaymentTypeId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrdersId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
                         name: "FK_Orders_Customer_CustomerId",
                         column: x => x.CustomerId,
@@ -248,7 +251,7 @@ namespace BangazonAPI.Migrations
                         name: "FK_OrderProduct_Orders_OrdersId",
                         column: x => x.OrdersId,
                         principalTable: "Orders",
-                        principalColumn: "OrdersId",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderProduct_Product_ProductId",
