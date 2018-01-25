@@ -10,7 +10,7 @@ namespace BangazonAPI.Models
      [Key]
      public int CustomerId { get; set; }
  
-     [Required]
+    [Required]
      [DataType(DataType.Date)]
      [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
      public DateTime DateCreated { get; set; }
