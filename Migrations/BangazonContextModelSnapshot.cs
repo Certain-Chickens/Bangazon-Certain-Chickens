@@ -40,12 +40,17 @@ namespace BangazonAPI.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("strftime('%Y%m-%d %H:%M:%S')");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired();
 
                     b.HasKey("CustomerId");
 
@@ -146,10 +151,12 @@ namespace BangazonAPI.Migrations
 
             modelBuilder.Entity("BangazonAPI.Models.Orders", b =>
                 {
-                    b.Property<int>("OrdersId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CustomerId");
+
+                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
@@ -157,7 +164,7 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int?>("PaymentTypeId");
 
-                    b.HasKey("OrdersId");
+                    b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
 
@@ -171,12 +178,19 @@ namespace BangazonAPI.Migrations
                     b.Property<int>("PaymentTypeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccountNumber");
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<string>("PaymentName")
-                        .IsRequired();
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(12);
 
                     b.HasKey("PaymentTypeId");
 
