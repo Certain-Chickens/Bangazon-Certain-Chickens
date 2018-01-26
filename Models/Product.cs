@@ -30,5 +30,6 @@ namespace BangazonAPI.Models
     [Required]
     public int Quantity { get; set; }
 
+    public ICollection<OrderProduct> OrderProduct;
   }
 }
