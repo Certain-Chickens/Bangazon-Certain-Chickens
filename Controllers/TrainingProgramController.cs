@@ -129,11 +129,23 @@ namespace BangazonAPI.Controllers
             {
                 return NotFound();
             }
+           
+            DateTime date1 = DateTime.Now;
+            DateTime date2 = trainingProgram.StartDate;
+            int result = DateTime.Compare(date1, date2);
+
+            if (result >= 0)
+            {
+                return BadRequest();  
+            }
+            else 
+            {
             _context.TrainingProgram.Remove(trainingProgram);
             _context.SaveChanges();
             return Ok(trainingProgram);
-        }
 
+            }
+        }
         private bool TrainingProgramExists(int trainingProgramId)
         {
             return _context.TrainingProgram.Any(g => g.TrainingProgramId == trainingProgramId);
