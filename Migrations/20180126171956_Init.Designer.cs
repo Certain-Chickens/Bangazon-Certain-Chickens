@@ -11,8 +11,8 @@ using System;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20180125221243_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180126171956_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,9 +48,6 @@ namespace BangazonAPI.Migrations
                         .IsRequired();
 
                     b.Property<string>("LastName")
-                        .IsRequired();
-
-                    b.Property<string>("StreetAddress")
                         .IsRequired();
 
                     b.HasKey("CustomerId");
@@ -185,10 +182,6 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(12);
@@ -250,8 +243,7 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int>("MaxAttendees");
 
-                    b.Property<string>("StartDate")
-                        .IsRequired();
+                    b.Property<DateTime>("StartDate");
 
                     b.HasKey("TrainingProgramId");
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BangazonAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,8 +30,7 @@ namespace BangazonAPI.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y%m-%d %H:%M:%S')"),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    StreetAddress = table.Column<string>(type: "TEXT", nullable: false)
+                    LastName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +72,7 @@ namespace BangazonAPI.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     EndDate = table.Column<string>(type: "TEXT", nullable: true),
                     MaxAttendees = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartDate = table.Column<string>(type: "TEXT", nullable: false)
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,7 +87,6 @@ namespace BangazonAPI.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AccountNumber = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     Description = table.Column<string>(type: "TEXT", maxLength: 12, nullable: false)
                 },
                 constraints: table =>

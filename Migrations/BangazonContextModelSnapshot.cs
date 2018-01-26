@@ -49,9 +49,6 @@ namespace BangazonAPI.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<string>("StreetAddress")
-                        .IsRequired();
-
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customer");
@@ -184,10 +181,6 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(12);
@@ -249,8 +242,7 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int>("MaxAttendees");
 
-                    b.Property<string>("StartDate")
-                        .IsRequired();
+                    b.Property<DateTime>("StartDate");
 
                     b.HasKey("TrainingProgramId");
 
