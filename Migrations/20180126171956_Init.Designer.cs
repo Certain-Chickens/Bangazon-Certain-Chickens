@@ -11,8 +11,8 @@ using System;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20180126170103_InitialDBCreation")]
-    partial class InitialDBCreation
+    [Migration("20180126171956_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
