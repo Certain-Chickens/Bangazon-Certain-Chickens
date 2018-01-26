@@ -11,11 +11,11 @@ using BangazonAPI.Models;
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class OrdersController : Controller
+    public class EmployeeController : Controller
     {
         private BangazonContext _context;
         // Constructor method to create an instance of context to communicate with our database.
-        public OrdersController(BangazonContext ctx)
+        public EmployeeController(BangazonContext ctx)
         {
             _context = ctx;
         }
@@ -23,16 +23,16 @@ namespace BangazonAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var Orders = _context.Orders.ToList();
-            if (Orders == null)
+            var Employee = _context.Employee.ToList();
+            if (Employee == null)
             {
                 return NotFound();
             }
-            return Ok(Orders);
+            return Ok(Employee);
         }
 
         // GET api/values/5
-        [HttpGet("{id}", Name = "GetSingleOrders")]
+        [HttpGet("{id}", Name = "GetSingleEmployee")]
         public IActionResult Get(int id)
         {
             if (!ModelState.IsValid)
@@ -42,14 +42,14 @@ namespace BangazonAPI.Controllers
 
             try
             {
-                Orders Orders = _context.Orders.Single(g => g.OrderId == id);
+                Employee Employee = _context.Employee.Single(g => g.EmployeeId == id);
 
-                if (Orders == null)
+                if (Employee == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(Orders);
+                return Ok(Employee);
             }
             catch (System.InvalidOperationException ex)
             {
@@ -59,14 +59,14 @@ namespace BangazonAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Orders Orders)
+        public IActionResult Post([FromBody]Employee Employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Orders.Add(Orders);
+            _context.Employee.Add(Employee);
 
             try
             {
@@ -74,7 +74,7 @@ namespace BangazonAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (OrdersExists(Orders.OrderId))
+                if (EmployeeExists(Employee.EmployeeId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -83,30 +83,30 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-            return CreatedAtRoute("GetSingleOrders", new { id = Orders.OrderId }, Orders);
+            return CreatedAtRoute("GetSingleEmployee", new { id = Employee.EmployeeId }, Employee);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Orders Orders)
+        public IActionResult Put(int id, [FromBody]Employee Employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != Orders.OrderId)
+            if (id != Employee.EmployeeId)
             {
                 return BadRequest();
             }
-            _context.Orders.Update(Orders);
+            _context.Employee.Update(Employee);
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrdersExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -119,24 +119,9 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        private bool EmployeeExists(int EmployeeId)
         {
-            Orders Orders = _context.Orders.Single(g => g.OrderId == id);
-
-            if (Orders == null)
-            {
-                return NotFound();
-            }
-            _context.Orders.Remove(Orders);
-            _context.SaveChanges();
-            return Ok(Orders);
-        }
-
-        private bool OrdersExists(int OrdersId)
-        {
-            return _context.Orders.Any(g => g.OrderId == OrdersId);
+            return _context.Employee.Any(g => g.EmployeeId == EmployeeId);
         }
 
     }

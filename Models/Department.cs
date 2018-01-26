@@ -14,5 +14,7 @@ namespace BangazonAPI.Models
     public string DepartmentName { get; set; }
     public int ExpenseBudget { get; set; }
 
+    public ICollection<Employee> Employee;
+
   }
 }
