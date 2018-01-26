@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BangazonAPI.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace BangazonAPI.Migrations
                 {
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y%m-%d %H:%M:%S')"),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false)
                 },

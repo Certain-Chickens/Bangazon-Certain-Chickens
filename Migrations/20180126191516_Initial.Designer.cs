@@ -11,8 +11,8 @@ using System;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20180126171956_Init")]
-    partial class Init
+    [Migration("20180126191516_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace BangazonAPI.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasDefaultValueSql("strftime('%Y%m-%d %H:%M:%S')");
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
                     b.Property<string>("FirstName")
                         .IsRequired();

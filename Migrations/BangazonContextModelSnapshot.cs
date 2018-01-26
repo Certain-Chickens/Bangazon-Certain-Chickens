@@ -41,7 +41,7 @@ namespace BangazonAPI.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasDefaultValueSql("strftime('%Y%m-%d %H:%M:%S')");
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
