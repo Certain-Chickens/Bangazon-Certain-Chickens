@@ -42,7 +42,7 @@ namespace BangazonAPI.Controllers
 
             try
             {
-                Orders Orders = _context.Orders.Single(g => g.OrdersId == id);
+                Orders Orders = _context.Orders.Single(g => g.OrderId == id);
 
                 if (Orders == null)
                 {
@@ -74,7 +74,7 @@ namespace BangazonAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (OrdersExists(Orders.OrdersId))
+                if (OrdersExists(Orders.OrderId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -83,7 +83,7 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-            return CreatedAtRoute("GetSingleOrders", new { id = Orders.OrdersId }, Orders);
+            return CreatedAtRoute("GetSingleOrders", new { id = Orders.OrderId }, Orders);
         }
 
         // PUT api/values/5
@@ -95,7 +95,7 @@ namespace BangazonAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != Orders.OrdersId)
+            if (id != Orders.OrderId)
             {
                 return BadRequest();
             }
@@ -123,7 +123,7 @@ namespace BangazonAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Orders Orders = _context.Orders.Single(g => g.OrdersId == id);
+            Orders Orders = _context.Orders.Single(g => g.OrderId == id);
 
             if (Orders == null)
             {
@@ -136,8 +136,8 @@ namespace BangazonAPI.Controllers
 
         private bool OrdersExists(int OrdersId)
         {
-            return _context.Orders.Any(g => g.OrdersId == OrdersId);
+            return _context.Orders.Any(g => g.OrderId == OrdersId);
         }
-        
+
     }
 }
