@@ -21,7 +21,7 @@ namespace BangazonAPI.Models
     [Required]
     public string LastName { get; set; }
 
-    [Required]
-    public string StreetAddress { get; set; }
+    // [Required]
+    // public string StreetAddress { get; set; }
   }
 }

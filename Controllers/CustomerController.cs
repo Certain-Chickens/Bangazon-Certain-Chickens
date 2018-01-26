@@ -12,12 +12,12 @@ using Microsoft.EntityFrameworkCore;
 namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("customers")]
-    public class CustomersController : Controller
+    [Route("api/[controller]")]
+    public class CustomerController : Controller
     {
         private BangazonContext context;
 
-        public CustomersController(BangazonContext ctx)
+        public CustomerController(BangazonContext ctx)
         {
             context = ctx;
         }

@@ -11,11 +11,10 @@ namespace BangazonAPI.Models
     public int TrainingProgramId { get; set; }
 
     [Required]
-    public string StartDate { get; set; }
+    public DateTime StartDate { get; set; }
     public string EndDate { get; set; }
     public int MaxAttendees { get; set; }
     
-    // public ICollection<OrderProduct> OrderProducts;
 
   }
 }

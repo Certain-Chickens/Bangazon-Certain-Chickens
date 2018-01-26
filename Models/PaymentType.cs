@@ -10,11 +10,6 @@ namespace BangazonAPI.Models
     public int PaymentTypeId {get;set;}
 
     [Required]
-    [DataType(DataType.Date)]
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime DateCreated {get;set;}
-
-    [Required]
     [StringLength(12)]
     public string Description { get; set; }
 
