@@ -46,24 +46,33 @@ namespace BangazonAPI.Controllers
             try
             {
 
-                IQueryable<object> MainList = _context.Orders.Include("OrderProduct.");
+                var productIdList =
+                        from op in _context.OrderProduct
+                        join o in _context.Orders
+                        on op.OrderId equals o.OrderId
+                        select op;
 
-                Orders Orders = _context.Orders
-                        .Include(o => o.OrderId == OrderProduct.OrdersId)
-                        .Single(g => g.OrderId == OrderProduct.OrdersId);
-                {
-                     _context.Product.Single(p => p.CustomerId == Orders.OrderId);
-                };
+                var orderList =
+                        from p in _context.Product
+                        join pl in productIdList
+                        on p.ProductId equals pl.ProductId
+                        select p;
 
-            // SELECT * from Orders, Product
-            // where Orders.CustomerId = Product.CustomerId
+                // var product = _context.Product
+                // .Select(p => new {
+                //     ProductId = p.ProductId,
+                //     Name = p.Title,
+                //     Price = p.Price,
+                //     Quantity = p.Quantity
+                // })
+                // ;
 
-                if (Orders == null)
+                if (orderList == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(Orders);
+                return Ok(orderList);
 
             }
             catch (System.InvalidOperationException ex)
