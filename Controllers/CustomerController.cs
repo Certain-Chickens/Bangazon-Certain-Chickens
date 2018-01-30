@@ -22,19 +22,36 @@ namespace BangazonAPI.Controllers
             context = ctx;
         }
 
-        // GET /customers
+        // RETURN CUSTOMER WHO NEVER PLACED AN ORDER
+         //GET api from customer
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(bool? active)
         {
-            IQueryable<object> customers = from customer in context.Customer select customer;
-
-            if (customers == null)
+            //return all customers
+            if (active == null)
             {
-                return NotFound();
+                var customers = context.Customer.ToList();
+                if (customers == null)
+                {
+                    return NotFound();
+                }
+                return Ok(customers);
             }
+            //when the query string is found to be false, when searching the API then it returns only the inactive customers
+            else
+            {
+                //search for all customers that have an order
+                var activeCustomer =
+                from o in context.Orders
+                join c in context.Customer on o.CustomerId equals c.CustomerId
+                select c;
 
-            return Ok(customers);
+                //THEN list the customers that have never placed an order
+                var innactiveCustomers = context.Customer.Except(activeCustomer);
 
+                return Ok(innactiveCustomers);
+
+            }
         }
 
         // GET /customers/5

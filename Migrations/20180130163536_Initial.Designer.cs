@@ -11,7 +11,7 @@ using System;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20180126191516_Initial")]
+    [Migration("20180130163536_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,13 +134,13 @@ namespace BangazonAPI.Migrations
                     b.Property<int>("OrderProductId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("OrdersId");
+                    b.Property<int>("OrderId");
 
                     b.Property<int>("ProductId");
 
                     b.HasKey("OrderProductId");
 
-                    b.HasIndex("OrdersId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -153,8 +153,6 @@ namespace BangazonAPI.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CustomerId");
-
-                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
@@ -288,7 +286,7 @@ namespace BangazonAPI.Migrations
                 {
                     b.HasOne("BangazonAPI.Models.Orders", "Orders")
                         .WithMany()
-                        .HasForeignKey("OrdersId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BangazonAPI.Models.Product", "Product")

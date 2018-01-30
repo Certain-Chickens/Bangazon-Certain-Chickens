@@ -159,7 +159,6 @@ namespace BangazonAPI.Migrations
                     OrderId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DateCompleted = table.Column<DateTime>(type: "TEXT", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     PaymentTypeId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
@@ -239,15 +238,15 @@ namespace BangazonAPI.Migrations
                 {
                     OrderProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    OrdersId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderProduct", x => x.OrderProductId);
                     table.ForeignKey(
-                        name: "FK_OrderProduct_Orders_OrdersId",
-                        column: x => x.OrdersId,
+                        name: "FK_OrderProduct_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
@@ -285,9 +284,9 @@ namespace BangazonAPI.Migrations
                 column: "TrainingProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderProduct_OrdersId",
+                name: "IX_OrderProduct_OrderId",
                 table: "OrderProduct",
-                column: "OrdersId");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderProduct_ProductId",

@@ -11,7 +11,7 @@ namespace BangazonAPI.Models
     public int OrderProductId { get; set; }
 
     [Required]
-    public int OrdersId { get; set; }
+    public int OrderId { get; set; }
     public Orders Orders { get; set; }
 
     [Required]
