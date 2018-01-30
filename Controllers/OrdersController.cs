@@ -115,10 +115,10 @@ namespace BangazonAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            // if (id != Orders.OrderId)
-            // {
-            //     return BadRequest();
-            // }
+            if (id != Orders.OrderId)
+            {
+                return BadRequest();
+            }
 
             _context.Orders.Update(Orders);
 
@@ -161,8 +161,5 @@ namespace BangazonAPI.Controllers
         {
             return _context.Orders.Any(g => g.OrderId == OrdersId);
         }
-
-
-
     }
 }
