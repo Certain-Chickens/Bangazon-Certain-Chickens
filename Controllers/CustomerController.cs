@@ -9,6 +9,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/*Author: Leah Duvic and Greg Turner
+purpose: add/update/delete for Customer
+methods: 
+    GET list of all Customers
+    GET single Customer
+    POST a new Customer
+    PUT change information on a Customer
+ */
+
+// GET api from customer model
 namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]
@@ -22,12 +32,11 @@ namespace BangazonAPI.Controllers
             context = ctx;
         }
 
-        // RETURN CUSTOMER WHO NEVER PLACED AN ORDER
-         //GET api from customer
+         // This method handles GET requests to retrieve a single customer through searching by id in the db, add customer and returns an error if the customer does not exist. 
         [HttpGet]
         public IActionResult Get(bool? active)
         {
-            //return all customers
+            
             if (active == null)
             {
                 var customers = context.Customer.ToList();
@@ -37,32 +46,34 @@ namespace BangazonAPI.Controllers
                 }
                 return Ok(customers);
             }
-            //when the query string is found to be false, when searching the API then it returns only the inactive customers
+            
+            // Then by using the URL parameter /customers/?active=false, the JSON response only contains the customers that don't have any orders placed yet.
             else
             {
-                //search for all customers that have an order
+                // first, search for all customers that have an order
                 var activeCustomer =
                 from o in context.Orders
                 join c in context.Customer on o.CustomerId equals c.CustomerId
                 select c;
 
-                //THEN list the customers that have never placed an order
+                // THEN list the customers that have never placed an order by eliminating the active customers.
                 var innactiveCustomers = context.Customer.Except(activeCustomer);
 
                 return Ok(innactiveCustomers);
-
             }
         }
 
-        // GET /customers/5
+        // This method is using GET to retrieve a single customer
         [HttpGet("{id}", Name = "GetCustomer")]
         public IActionResult Get([FromRoute] int id)
         {
+            // error to handle if the user input the correct info in order to use the api.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // search database to try and find a match for the customer id entered
             try
             {
                 Customer customer = context.Customer.Single(m => m.CustomerId == id);
@@ -83,7 +94,8 @@ namespace BangazonAPI.Controllers
 
         }
 
-        // POST /customers
+        // This method handles POST requests to add a customer, saves it and throws an error if it already exists.
+
         [HttpPost]
         public IActionResult Post([FromBody] Customer customer)
         {
@@ -91,7 +103,8 @@ namespace BangazonAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
+            // save customer to db 
             context.Customer.Add(customer);
 
             try
@@ -100,6 +113,7 @@ namespace BangazonAPI.Controllers
             }
             catch (DbUpdateException)
             {
+                // check if the customer Id already exists in the database and throw an error
                 if (CustomerExists(customer.CustomerId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
@@ -113,7 +127,8 @@ namespace BangazonAPI.Controllers
             return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
-        // PUT /customers/5
+        // This method handles PUT requests to edit a single customer through searching by id in the db, saves modifications and returns an error if the customer does not exist. 
+        
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Customer customer)
         {
@@ -148,7 +163,8 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE /customers/5
+        // This method handles DELETE requests to delete a single customer through searching by id in the db, removes customer and returns an error if the customer does not exist. 
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
