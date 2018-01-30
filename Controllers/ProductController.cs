@@ -30,6 +30,7 @@ namespace BangazonAPI.Controllers
             _context = ctx;
         }
 
+        // This method handles GET requests to get all Products and returns an error if the Product does not exist.
         [HttpGet]
         public IActionResult Get()
         {
@@ -40,8 +41,7 @@ namespace BangazonAPI.Controllers
             }
             return Ok(Product);
         }
-
-        // GET api/values/5
+        // This method handles GET requests to get a single Product through searching by id in the db, and returns an error if the Product does not exist.
         [HttpGet("{id}", Name = "GetSingleProduct")]
         public IActionResult Get(int id)
         {
@@ -68,7 +68,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // POST api/values
+        // This method handles POST requests add a Product to the Product table
         [HttpPost]
         public IActionResult Post([FromBody]Product Product)
         {
@@ -97,7 +97,7 @@ namespace BangazonAPI.Controllers
             return CreatedAtRoute("GetSingleProduct", new { id = Product.ProductId }, Product);
         }
 
-        // PUT api/values/5
+        // This method handles PUT requests to edit an Product and returns an error if the Product does not exist.
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Product Product)
         {
@@ -130,7 +130,7 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE api/values/5
+        // This method handles DELETE requests to delete a single Product and returns an error if the Product does not exist.
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

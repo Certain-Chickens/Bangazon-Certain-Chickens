@@ -29,6 +29,7 @@ namespace BangazonAPI.Controllers
             _context = ctx;
         }
 
+        // This method handles GET requests to get all Departments and returns an error if the Department does not exist.
         [HttpGet]
         public IActionResult Get()
         {
@@ -40,7 +41,7 @@ namespace BangazonAPI.Controllers
             return Ok(Departments);
         }
 
-        // GET api/values/5
+        // This method handles GET requests to get a single Department through searching by id in the db, and returns an error if the Department does not exist.
         [HttpGet("{id}", Name = "GetSingleDepartment")]
         public IActionResult Get(int id)
         {
@@ -67,7 +68,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // POST api/values
+        // This method handles POST requests add a Department to the Department table
         [HttpPost]
         public IActionResult Post([FromBody]Department Department)
         {
@@ -96,7 +97,7 @@ namespace BangazonAPI.Controllers
             return CreatedAtRoute("GetSingleDepartment", new { id = Department.DepartmentId }, Department);
         }
 
-        // PUT api/values/5
+        // This method handles PUT requests to edit a Department and returns an error if the Department does not exist.
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Department Department)
         {
