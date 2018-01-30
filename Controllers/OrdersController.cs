@@ -28,6 +28,7 @@ namespace BangazonAPI.Controllers
             {
                 return NotFound();
             }
+
             return Ok(Orders);
         }
 
@@ -35,6 +36,8 @@ namespace BangazonAPI.Controllers
         [HttpGet("{id}", Name = "GetSingleOrders")]
         public IActionResult Get(int id)
         {
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -42,14 +45,35 @@ namespace BangazonAPI.Controllers
 
             try
             {
-                Orders Orders = _context.Orders.Single(g => g.OrderId == id);
 
-                if (Orders == null)
+                var productIdList =
+                        from op in _context.OrderProduct
+                        join o in _context.Orders
+                        on op.OrderId equals o.OrderId
+                        select op;
+
+                var orderList =
+                        from p in _context.Product
+                        join pl in productIdList
+                        on p.ProductId equals pl.ProductId
+                        select p;
+
+                // var product = _context.Product
+                // .Select(p => new {
+                //     ProductId = p.ProductId,
+                //     Name = p.Title,
+                //     Price = p.Price,
+                //     Quantity = p.Quantity
+                // })
+                // ;
+
+                if (orderList == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(Orders);
+                return Ok(orderList);
+
             }
             catch (System.InvalidOperationException ex)
             {
@@ -139,6 +163,8 @@ namespace BangazonAPI.Controllers
         {
             return _context.Orders.Any(g => g.OrderId == OrdersId);
         }
+
+
 
     }
 }
