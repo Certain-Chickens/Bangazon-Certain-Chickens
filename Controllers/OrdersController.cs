@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
+using Microsoft.AspNetCore.Cors;
+using System.Web.Http.Cors;
 
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]
+    [System.Web.Http.Cors.EnableCors(origins: "http://bangazon.com", headers: "accept,content-type,origin,x-my-header", methods: "*")]
     public class OrdersController : Controller
     {
         private BangazonContext _context;
@@ -147,7 +150,8 @@ namespace BangazonAPI.Controllers
         public IActionResult Delete(int id)
         {
             Orders Orders = _context.Orders.Single(g => g.OrderId == id);
-
+                                   
+            
             if (Orders == null)
             {
                 return NotFound();
