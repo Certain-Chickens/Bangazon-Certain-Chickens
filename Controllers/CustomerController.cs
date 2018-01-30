@@ -10,12 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 /*Author: Leah Duvic and Greg Turner
-purpose: add/update/delete for Customer
+purpose: Create/Read/Update/Delete for the Customer table in BANGAZON_DB
 methods: 
     GET list of all Customers
     GET single Customer
     POST a new Customer
-    PUT change information on a Customer
+    PUT update information on a Customer
+    DELETE a single Customer
  */
 
 // GET api from customer model
@@ -104,7 +105,7 @@ namespace BangazonAPI.Controllers
                 return BadRequest(ModelState);
             }
             
-            // save customer to db 
+            // save customer to BANGAZON_DB 
             context.Customer.Add(customer);
 
             try

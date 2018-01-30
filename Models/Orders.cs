@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+/*
+    author: Greg Turner
+    purpose: Orders model schema for BANGAZON_DB
+*/
 namespace BangazonAPI.Models
 {
   public class Orders
