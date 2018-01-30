@@ -10,6 +10,16 @@ using BangazonAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using System.Web.Http.Cors;
 
+/* Autor: Ryan McPherson, Keith Davis, Leah Duvic, Kevin Haggerty
+purpose: create/read/update/delete for Orders
+methods:
+    GET list of all Orders
+    GET single Orders with associated products
+    POST a new Order
+    PUT change information on a Order
+    DELETE an Order
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -147,8 +157,8 @@ namespace BangazonAPI.Controllers
         public IActionResult Delete(int id)
         {
             Orders Orders = _context.Orders.Single(g => g.OrderId == id);
-                                   
-            
+
+
             if (Orders == null)
             {
                 return NotFound();

@@ -8,6 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
 
+/* Autor: Ryan McPherson
+purpose: create/read/update for Department
+methods:
+    GET list of all Departments
+    GET single Department
+    POST a new Department
+    PUT change information on a Department
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]

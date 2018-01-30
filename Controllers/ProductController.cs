@@ -8,6 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
 
+/* Autor: Ryan McPherson
+purpose: create/read/update/delete for Products
+methods:
+    GET list of all Products
+    GET single Product
+    POST a new Product
+    PUT change information on a Product
+    DELETE a Product
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]

@@ -16,9 +16,9 @@ namespace BangazonAPI.Models
 
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    
+
     public bool Supervisor { get; set; }
-    
+
     public ICollection<EmployeeComputer> EmployeeComputer;
     public ICollection<EmployeeTraining> EmployeeTraining;
 
