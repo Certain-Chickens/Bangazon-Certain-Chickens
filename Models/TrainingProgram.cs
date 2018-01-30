@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+/*
+    author: Kevin Haggerty
+    purpose: TrainingProgram model schema for BANGAZON_DB
+*/
 namespace BangazonAPI.Models
 {
   public class TrainingProgram
