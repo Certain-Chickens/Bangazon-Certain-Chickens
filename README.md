@@ -11,4 +11,6 @@ Feel free to save your Database anywhere you like
 - Postman [https://www.getpostman.com/] Post/Get/Put/Delete methods
 - DB Browser for SQlight [http://sqlitebrowser.org/]
 
-
+## Entity Relationship Diagram
+- Our ERD defining our database structure
+![alt text](http://i67.tinypic.com/jv28er.png)
