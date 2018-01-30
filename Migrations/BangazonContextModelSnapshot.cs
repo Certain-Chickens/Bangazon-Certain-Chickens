@@ -153,8 +153,6 @@ namespace BangazonAPI.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<DateTime?>("DateCompleted");
-
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");

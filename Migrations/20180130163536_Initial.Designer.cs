@@ -11,7 +11,7 @@ using System;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20180129212645_Initial")]
+    [Migration("20180130163536_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -153,8 +153,6 @@ namespace BangazonAPI.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CustomerId");
-
-                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()

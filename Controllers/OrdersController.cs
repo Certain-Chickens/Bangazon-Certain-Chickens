@@ -37,7 +37,6 @@ namespace BangazonAPI.Controllers
         public IActionResult Get(int id)
         {
 
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -46,33 +45,29 @@ namespace BangazonAPI.Controllers
             try
             {
 
-                var productIdList =
-                        from op in _context.OrderProduct
-                        join o in _context.Orders
-                        on op.OrderId equals o.OrderId
-                        select op;
+                var order =
+                // Query for a single order
+                _context.Orders.Where(o => o.OrderId == id)
+                // Create an anonymous object
+                .Select(o => new {
+                    OrderId = o.OrderId,
+                    CustomerId = o.CustomerId,
+                    PaymentTypeId = o.PaymentTypeId,
+                    // Traverse the joiner table and return the products associated by creating another anonymous object
+                    Products = o.OrderProduct.Select(op => new {
+                        ProductId = op.Product.ProductId,
+                        Name = op.Product.Title,
+                        Price = op.Product.Price,
+                        Quantity = op.Product.Quantity
+                    })
+                });
 
-                var orderList =
-                        from p in _context.Product
-                        join pl in productIdList
-                        on p.ProductId equals pl.ProductId
-                        select p;
-
-                // var product = _context.Product
-                // .Select(p => new {
-                //     ProductId = p.ProductId,
-                //     Name = p.Title,
-                //     Price = p.Price,
-                //     Quantity = p.Quantity
-                // })
-                // ;
-
-                if (orderList == null)
+                if (order == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(orderList);
+                return Ok(order);
 
             }
             catch (System.InvalidOperationException ex)
@@ -124,14 +119,17 @@ namespace BangazonAPI.Controllers
             {
                 return BadRequest();
             }
+
             _context.Orders.Update(Orders);
+
             try
             {
                 _context.SaveChanges();
             }
+
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrdersExists(id))
+                if (!OrdersExists(Orders.OrderId))
                 {
                     return NotFound();
                 }
@@ -163,8 +161,5 @@ namespace BangazonAPI.Controllers
         {
             return _context.Orders.Any(g => g.OrderId == OrdersId);
         }
-
-
-
     }
 }

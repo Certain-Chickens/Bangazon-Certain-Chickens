@@ -16,16 +16,12 @@ namespace BangazonAPI.Models
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateCreated {get;set;}
 
-
-    [DataType(DataType.Date)]
-    public DateTime? DateCompleted {get;set;}
-
     public int CustomerId {get;set;}
     public Customer Customer {get;set;}
 
     public int? PaymentTypeId {get;set;}
     public PaymentType PaymentType {get;set;}
 
-    public ICollection<OrderProduct> OrderProduct;
+    public ICollection<OrderProduct> OrderProduct {get;set;}
   }
 }
