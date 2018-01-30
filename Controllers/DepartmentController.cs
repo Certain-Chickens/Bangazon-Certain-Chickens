@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
 
-/* Autor: Ryan McPherson
+/* Author: Ryan McPherson
 purpose: create/read/update for Department
 methods:
     GET list of all Departments

@@ -10,7 +10,7 @@ using BangazonAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using System.Web.Http.Cors;
 
-/* Autor: Ryan McPherson, Keith Davis, Leah Duvic, Kevin Haggerty
+/* Author: Ryan McPherson, Keith Davis, Leah Duvic, Kevin Haggerty
 purpose: create/read/update/delete for Orders
 methods:
     GET list of all Orders
