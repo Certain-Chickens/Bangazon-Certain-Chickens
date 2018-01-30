@@ -8,6 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
 
+/* Author: Ryan McPherson
+purpose: create/read/update/delete for ProductTypes
+methods:
+    GET list of all ProductTypes
+    GET single ProductType
+    POST a new ProductType
+    PUT change information on a ProductType
+    DELETE a ProductType
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -19,7 +29,7 @@ namespace BangazonAPI.Controllers
         {
             _context = ctx;
         }
-
+        // This method handles GET requests to get all productTypes and returns an error if the product does not exist.
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,7 +41,7 @@ namespace BangazonAPI.Controllers
             return Ok(ProductType);
         }
 
-        // GET api/values/5
+        // This method handles GET requests to get a single productType through searching by id in the db, and returns an error if the customer does not exist.
         [HttpGet("{id}", Name = "GetSingleProductType")]
         public IActionResult Get(int id)
         {
@@ -58,7 +68,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // POST api/values
+        // This method handles POST requests add a productType to the ProductType table
         [HttpPost]
         public IActionResult Post([FromBody]ProductType ProductType)
         {
@@ -87,7 +97,7 @@ namespace BangazonAPI.Controllers
             return CreatedAtRoute("GetSingleProductType", new { id = ProductType.ProductTypeId }, ProductType);
         }
 
-        // PUT api/values/5
+        // This method handles PUT requests to edit a productType and returns an error if the productType does not exist.
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]ProductType ProductType)
         {
@@ -120,7 +130,7 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE api/values/5
+        // This method handles DELETE requests to delete a single productType and returns an error if the productType does not exist.
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

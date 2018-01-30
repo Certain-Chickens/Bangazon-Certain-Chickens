@@ -10,6 +10,16 @@ using BangazonAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using System.Web.Http.Cors;
 
+/* Author: Ryan McPherson, Keith Davis, Leah Duvic, Kevin Haggerty
+purpose: create/read/update/delete for Orders
+methods:
+    GET list of all Orders
+    GET single Orders with associated products
+    POST a new Order
+    PUT change information on a Order
+    DELETE an Order
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -23,6 +33,7 @@ namespace BangazonAPI.Controllers
             _context = ctx;
         }
 
+        // This method handles GET requests to get all Orders and returns an error if the Order does not exist.
         [HttpGet]
         public IActionResult Get()
         {
@@ -35,7 +46,7 @@ namespace BangazonAPI.Controllers
             return Ok(Orders);
         }
 
-        // GET api/values/5
+        // This method handles GET requests to get a single Order through searching by id in the db, and returns an error if the Order does not exist.
         [HttpGet("{id}", Name = "GetSingleOrders")]
         public IActionResult Get(int id)
         {
@@ -49,14 +60,11 @@ namespace BangazonAPI.Controllers
             {
 
                 var order =
-                // Query for a single order
                 _context.Orders.Where(o => o.OrderId == id)
-                // Create an anonymous object
                 .Select(o => new {
                     OrderId = o.OrderId,
                     CustomerId = o.CustomerId,
                     PaymentTypeId = o.PaymentTypeId,
-                    // Traverse the joiner table and return the products associated by creating another anonymous object
                     Products = o.OrderProduct.Select(op => new {
                         ProductId = op.Product.ProductId,
                         Name = op.Product.Title,
@@ -80,7 +88,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // POST api/values
+        // This method handles POST requests add an Order to the Order table
         [HttpPost]
         public IActionResult Post([FromBody]Orders Orders)
         {
@@ -109,7 +117,7 @@ namespace BangazonAPI.Controllers
             return CreatedAtRoute("GetSingleOrders", new { id = Orders.OrderId }, Orders);
         }
 
-        // PUT api/values/5
+        // This method handles PUT requests to edit an Order and returns an error if the Order does not exist.
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Orders Orders)
         {
@@ -145,13 +153,13 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE api/values/5
+        // This method handles DELETE requests to delete a single Order and returns an error if the Order does not exist.
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             Orders Orders = _context.Orders.Single(g => g.OrderId == id);
-                                   
-            
+
+
             if (Orders == null)
             {
                 return NotFound();
